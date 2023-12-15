@@ -1,3 +1,6 @@
+#USADO PARA CREAR LA DB YA NO TIENE USO. 
+
+
 import mysql.connector
 
 
