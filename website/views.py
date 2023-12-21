@@ -15,17 +15,17 @@ def home(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            messages.success(request, 'You have been logged in succesfully.')
+            messages.success(request, 'Iniciaste sesion correctamente, bienvenido!')
             return redirect('home')
         else:
-            messages.success(request, 'There was an error while trying to log in, please try again. :/')
+            messages.success(request, 'Hubo un error mientras intentaste acceder, por favor intenta nuevamente :/')
             return redirect('home')
     else:
         return render(request, 'home.html', {'records': records}) 
     
 def logout_user(request):
     logout(request)
-    messages.success(request, 'You have been logged out succesfully.')
+    messages.success(request, 'Cerraste tu sesion, hasta pronto!')
     return redirect('home')
 
 def register_user(request):
@@ -38,7 +38,7 @@ def register_user(request):
             password = form.cleaned_data['password1']
             user = authenticate(username=username, password=password)
             login(request, user)
-            messages.success(request, "You Have Successfully Registered! Welcome!")
+            messages.success(request, "Te registraste con exito <3")
             return redirect('home')
     else:
         form = SignUpForm()
@@ -46,3 +46,14 @@ def register_user(request):
     
     return render(request, 'register.html', {'form':form})
 
+
+def customer_record(request, pk):
+    if request.user.is_authenticated:
+        #buscar records
+        customer_record = Record.objects.get(id= pk)
+        return render(request, 'record.html', {'customer_record':customer_record})
+    else:
+        messages.success(request, "Tenes que estar registrado para ver la informacion.")
+        return redirect('home')
+
+        
