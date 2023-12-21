@@ -6,7 +6,24 @@
 
 {% if user.is_authenticated %}
 
-<h1> arranca o no arranca </h1>
+<h1> Records: </h1>
+{% if records %}
+    {% for record in records %}
+        {{ record.first_name }} </br>
+        {{ record.last_name }} </br>
+        {{ record.address }} </br>
+        {{ record.city }} </br>
+        {{ record.state }} </br>
+        {{ record.mail }} </br>
+        {{ record.phone }} </br>
+        {{ record.zipcode }} </br>
+
+
+        </br>
+
+    {% endfor %}
+
+{% endif %}
 
 {% else %}
 
@@ -18,7 +35,6 @@
 
 <form method='POST' action={% url 'home'%}>
     {% csrf_token %}
-    <form>
         <div class="mb-3">
           <input type="text" class="form-control" name= "username", placeholder= "Username" required>
         </div>
