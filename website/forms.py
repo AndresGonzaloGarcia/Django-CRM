@@ -33,15 +33,18 @@ class SignUpForm(UserCreationForm):
 
 
 class addRecordForm(forms.ModelForm):
-    first_name= forms.CharField(required= True, label="", max_length=100, widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Nombre'}))
-    last_name= forms.CharField(required= True, label="", max_length=100, widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Apellido'}))
-    mail= forms.CharField(required= True, label="", max_length=100, widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Email'}))
-    phone= forms.CharField(required= True, label="", max_length=100, widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Telefono'}))
-    address= forms.CharField(required= True, label="", max_length=100, widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Direccion'}))
-    city= forms.CharField(required= True, label="", max_length=100, widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Ciudad'}))
-    state= forms.CharField(required= True, label="", max_length=100, widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Provincia'}))
-    zipcode= forms.CharField(required= True, label="", max_length=100, widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Codigo Postal'}))
+    first_name= forms.CharField(required= True, label="", widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Nombre'}))
+    last_name= forms.CharField(required= True, label="", widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Apellido'}))
+    mail= forms.CharField(required= True, label="", widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Email'}))
+    phone= forms.CharField(required= True, label="", widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Telefono'}))
+    address= forms.CharField(required= True, label="", widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Direccion'}))
+    city= forms.CharField(required= True, label="", widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Ciudad'}))
+    state= forms.CharField(required= True, label="", widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Provincia'}))
+    zipcode= forms.CharField(required= True, label="", widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Codigo Postal'}))
 
     class Meta:
         model = Record
         exclude = ('user',)
+
+
+

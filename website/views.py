@@ -79,6 +79,21 @@ def add_record(request):
     else:
         messages.success(request, 'Tenes que iniciar sesion para agregar datos...')
         return redirect('home')
+    
+
+def update_record(request, pk):
+    if request.user.is_authenticated:
+        current_record = Record.objects.get(id= pk)
+        form = addRecordForm(request.POST or None, instance= current_record) #instance toma el record que ya teniamos y lo pasa directamente a addRecord
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Datos actualizados.')
+            return redirect('home')
+        return render(request, 'update_record.html', {'form': form })
+    else:
+        messages.success(request, 'Tenes que iniciar sesion para modificar datos...')
+        return redirect('home')
+
 
 
 
