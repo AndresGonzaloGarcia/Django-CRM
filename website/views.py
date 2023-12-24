@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from .forms import SignUpForm
+from .forms import SignUpForm, addRecordForm
 from .models import Record
 
 def home(request):
@@ -53,7 +53,36 @@ def customer_record(request, pk):
         customer_record = Record.objects.get(id= pk)
         return render(request, 'record.html', {'customer_record':customer_record})
     else:
-        messages.success(request, "Tenes que estar registrado para ver la informacion.")
+        messages.success(request, "Tenes que iniciar sesion para ver la informacion.")
         return redirect('home')
+    
+def delete_record(request, pk):
+    if request.user.is_authenticated:
+        delete_it = Record.objects.get(id= pk)
+        delete_it.delete()
+        messages.success(request, "Los datos han sido eliminados correctamente. ")
+        return redirect('home')
+    else:
+        messages.success(request, "Tenes que iniciar sesion para eliminar los datos... ")
+        return redirect('home')
+    
+def add_record(request):
+    form = addRecordForm(request.POST or None)
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            if form.is_valid():
+                add_record = form.save()
+                messages.success(request, 'Datos agregados.')
+                return redirect('home')
+
+        return render(request, 'add_record.html', {'form': form })
+    else:
+        messages.success(request, 'Tenes que iniciar sesion para agregar datos...')
+        return redirect('home')
+
+
+
+
+
 
         
